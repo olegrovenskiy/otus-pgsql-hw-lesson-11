@@ -67,14 +67,80 @@
 
 https://pgconfigurator.cybertec.at/
 
-
-
-
+и применил конфигурацию
 
 
 ## Пункт 3.
 ### Нагрузить кластер через утилиту через утилиту pgbench (https://postgrespro.ru/docs/postgrespro/14/pgbench)
 
+        bash-4.2$ pgbench -c8 -P 6 -T 60 -U postgres postgres
+        Password:
+        pgbench (15.5)
+        starting vacuum...end.
+        progress: 6.0 s, 2304.4 tps, lat 3.444 ms stddev 1.360, 0 failed
+        progress: 12.0 s, 2298.2 tps, lat 3.472 ms stddev 1.575, 0 failed
+        progress: 18.0 s, 2407.7 tps, lat 3.313 ms stddev 1.216, 0 failed
+        progress: 24.0 s, 2343.9 tps, lat 3.402 ms stddev 1.274, 0 failed
+        progress: 30.0 s, 2314.0 tps, lat 3.446 ms stddev 1.294, 0 failed
+        progress: 36.0 s, 2384.4 tps, lat 3.345 ms stddev 1.266, 0 failed
+        progress: 42.0 s, 2362.6 tps, lat 3.376 ms stddev 1.274, 0 failed
+        progress: 48.0 s, 2374.5 tps, lat 3.359 ms stddev 1.244, 0 failed
+        progress: 54.0 s, 2361.3 tps, lat 3.378 ms stddev 1.244, 0 failed
+        progress: 60.0 s, 2400.3 tps, lat 3.323 ms stddev 1.211, 0 failed
+        transaction type: <builtin: TPC-B (sort of)>
+        scaling factor: 1
+        query mode: simple
+        number of clients: 8
+        number of threads: 1
+        maximum number of tries: 1
+        duration: 60 s
+        number of transactions actually processed: 141316
+        number of failed transactions: 0 (0.000%)
+        latency average = 3.385 ms
+        latency stddev = 1.300 ms
+        initial connection time = 25.854 ms
+        tps = 2355.760316 (without initial connection time)
+        bash-4.2$
 
 
-написать какого значения tps удалось достичь, показать какие параметры в какие значения устанавливали и почему
+## Пункт 4.
+### Написать какого значения tps удалось достичь, показать какие параметры в какие значения устанавливали и почему
+
+Ранее параметры были ыставлены по рекомендациям на первых занятиях, и как видно применение параметров с рекомендованного сайта не улучшило tps, 
+думаю что данные параметры ВМ не позволяют уже дополнительно что либо оптимизировать.
+
+Для эксперимента увеличил число CPU с 2 до 4.
+
+        bash-4.2$ pgbench -c8 -P 6 -T 60 -U postgres postgres
+        Password:
+        pgbench (15.5)
+        starting vacuum...end.
+        progress: 6.0 s, 3229.5 tps, lat 2.459 ms stddev 1.199, 0 failed
+        progress: 12.0 s, 3256.0 tps, lat 2.450 ms stddev 1.207, 0 failed
+        progress: 18.0 s, 3296.2 tps, lat 2.420 ms stddev 1.177, 0 failed
+        progress: 24.0 s, 3319.0 tps, lat 2.404 ms stddev 1.165, 0 failed
+        progress: 30.0 s, 3234.7 tps, lat 2.467 ms stddev 1.222, 0 failed
+        progress: 36.0 s, 3268.5 tps, lat 2.441 ms stddev 1.166, 0 failed
+        progress: 42.0 s, 3275.7 tps, lat 2.435 ms stddev 1.186, 0 failed
+        progress: 48.0 s, 3256.6 tps, lat 2.450 ms stddev 1.187, 0 failed
+        progress: 54.0 s, 3300.9 tps, lat 2.417 ms stddev 1.178, 0 failed
+        progress: 60.0 s, 3231.8 tps, lat 2.469 ms stddev 1.203, 0 failed
+        transaction type: <builtin: TPC-B (sort of)>
+        scaling factor: 1
+        query mode: simple
+        number of clients: 8
+        number of threads: 1
+        maximum number of tries: 1
+        duration: 60 s
+        number of transactions actually processed: 196020
+        number of failed transactions: 0 (0.000%)
+        latency average = 2.441 ms
+        latency stddev = 1.189 ms
+        initial connection time = 26.179 ms
+        tps = 3268.098680 (without initial connection time)
+        bash-4.2$
+
+Данное изменение дало заметный прирост по TPS = 3268/
+
+
+
