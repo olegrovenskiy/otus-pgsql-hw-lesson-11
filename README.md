@@ -73,7 +73,7 @@ https://pgconfigurator.cybertec.at/
 
 
 ## Пункт 3.
-### Нагрузить кластер через утилиту через утилиту pgbench (https://postgrespro.ru/docs/postgrespro/14/pgbench)
+### Нагрузить кластер через утилиту через утилиту pgbench
 
         bash-4.2$ pgbench -c8 -P 6 -T 60 -U postgres postgres
         Password:
@@ -142,7 +142,7 @@ https://pgconfigurator.cybertec.at/
         tps = 3268.098680 (without initial connection time)
         bash-4.2$
 
-Данное изменение дало заметный прирост по TPS = 3268/
+Данное изменение дало заметный прирост по TPS = 3268.
 
 
 
