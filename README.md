@@ -67,6 +67,8 @@
 
 https://pgconfigurator.cybertec.at/
 
+![data source](https://github.com/olegrovenskiy/otus-pgsql-hw-lesson-11/blob/main/dz11.png)
+
 и применил конфигурацию
 
 
